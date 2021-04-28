@@ -1,14 +1,9 @@
 ```java
-package beackjoon2.recursion.b1780;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-/**
- * 1780번 종이의 개수
- */
 public class Main {
     static int minusCount = 0;
     static int zeroCount = 0;
@@ -24,41 +19,29 @@ public class Main {
             StringTokenizer st = new StringTokenizer(br.readLine());
             for (int j = 0; j < n; j++) {
                 int xy = Integer.parseInt(st.nextToken());
-
-                if (xy == -1) {
-                    minusCount++;
-                }
-                if (xy == 0) {
-                    zeroCount++;
-                }
-                if (xy == 1) {
-                    count++;
-                }
                 paper[i][j] = xy;
             }
         }
 
-        if (minusCount == n * n) {
+        if (isFull(paper, -1)) {
+            minusCount++;
             print();
             return;
         }
 
-        if (zeroCount == n * n) {
+        if (isFull(paper, 0)) {
+            zeroCount++;
             print();
             return;
         }
 
-        if (count == n * n) {
+        if (isFull(paper, 1)) {
+            count++;
             print();
             return;
         }
 
-        minusCount = 0;
-        zeroCount = 0;
-        count = 0;
-        // 0 0, 0 4, 4 0, 4,4
         cut(paper, n);
-
         print();
 
     }
